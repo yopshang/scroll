@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <el-button type="primary" @click="list">取得資料</el-button>
+    <!-- <el-button type="primary" @click="getList">取得資料</el-button>
     <el-button type="primary" @click="checkIfLoading">查看</el-button> -->
     <el-table
       :data="tableData"
@@ -67,7 +67,7 @@ export default {
     }
   },
   methods:{
-    list() {
+    getList() {
         console.log('載入');
         axios.post("/list").then(response => {
             if (response.data) {
@@ -91,7 +91,7 @@ export default {
 
         console.log(document.querySelector('.data-table'), scrollTop, innerHeight-viewHeight);
         if ( scrollTop >= innerHeight-viewHeight &&  innerHeight-viewHeight >= 0) {
-          this.list();
+          this.getList();
         }
         
     },
@@ -126,5 +126,6 @@ a {
 .data-table {
   max-height: 400px;
   overflow: scroll;
+  overflow-x: hidden;
 }
 </style>
