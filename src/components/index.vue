@@ -5,9 +5,7 @@
     <el-table
       :data="tableData"
       style="width: 100%"
-      
-      class="data-table"
-      @scroll="checkIfLoading">
+      class="data-table">
       <el-table-column
         prop="name"
         label="姓名"
@@ -28,7 +26,7 @@ import axios from 'axios';
 export default {
   data () {
     return {
-       tableData: [
+      tableData: [
           {
             name: '宮本武藏',
             age:20
@@ -65,7 +63,7 @@ export default {
             name: 'JR',
             age:12
           },
-        ]
+        ],
     }
   },
   methods:{
@@ -82,6 +80,7 @@ export default {
         })
     },
     checkIfLoading (){
+      console.log('成功滾動偵測');
       var scrollTop = document.querySelector('.data-table').scrollTop;
       var innerHeight = document.querySelector(".el-table__row").offsetHeight*this.tableData.length;
       var viewHeight = document.querySelector(".data-table").offsetHeight;
@@ -94,10 +93,15 @@ export default {
           console.log('載入');
         }
         
+    },
+    scrollHandler(){
+      var table = document.querySelector('.data-table');
+      table.addEventListener('scroll', this.checkIfLoading);
     }
   },
   mounted(){
-    this.checkIfLoading();
+    // this.checkIfLoading();
+    this.scrollHandler();
   }
 }
 </script>
