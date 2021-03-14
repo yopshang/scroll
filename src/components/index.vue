@@ -1,9 +1,13 @@
 <template>
   <div>
     <el-button type="primary" @click="list">取得資料</el-button>
+    <el-button type="primary" @click="checkIfLoading">查看</el-button>
     <el-table
       :data="tableData"
-      style="width: 100%">
+      style="width: 100%"
+      
+      class="data-table"
+      @scroll="checkIfLoading">
       <el-table-column
         prop="name"
         label="姓名"
@@ -26,8 +30,40 @@ export default {
     return {
        tableData: [
           {
-            name: '王小虎',
-            age:0
+            name: '宮本武藏',
+            age:20
+          },
+          {
+            name: '李逍遙',
+            age:15
+          },
+          {
+            name: 'Jack',
+            age:10
+          },
+          {
+            name: 'Shang',
+            age:11
+          },
+          {
+            name: 'Jeff',
+            age:12
+          },
+          {
+            name: 'Lisa',
+            age:12
+          },
+          {
+            name: 'JE',
+            age:55
+          },
+          {
+            name: 'RD',
+            age:12
+          },
+          {
+            name: 'JR',
+            age:12
           },
         ]
     }
@@ -44,7 +80,24 @@ export default {
                 })
             }
         })
+    },
+    checkIfLoading (){
+      var scrollTop = document.querySelector('.data-table').scrollTop;
+      var innerHeight = document.querySelector(".el-table__row").offsetHeight*this.tableData.length;
+      var viewHeight = document.querySelector(".data-table").offsetHeight;
+      // var hideScrollHeight = innerHeight-viewHeight;
+      // var contentHeight =innerHeight+scrollTop ;
+      
+
+        console.log(document.querySelector('.data-table'), scrollTop, innerHeight-viewHeight);
+        if ( scrollTop >= innerHeight-viewHeight &&  innerHeight-viewHeight >= 0) {
+          console.log('載入');
+        }
+        
     }
+  },
+  mounted(){
+    this.checkIfLoading();
   }
 }
 </script>
@@ -64,5 +117,9 @@ li {
 }
 a {
   color: #42b983;
+}
+.data-table {
+  max-height: 400px;
+  overflow: scroll;
 }
 </style>
