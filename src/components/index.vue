@@ -5,7 +5,8 @@
     <el-table
       :data="tableData"
       style="width: 100%"
-      class="data-table">
+      class="data-table"
+      stripe>
       <el-table-column
         prop="name"
         label="姓名"
